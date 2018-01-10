@@ -1,0 +1,164 @@
+[
+    {
+        "id": 1,
+        "name": "Mens",
+        "subCategories": [
+            {
+                "id": 3,
+                "name": "Brands",
+                "subCategories": [
+                    {
+                        "name": "Adidas",
+                        "id": 5
+                    },
+                    {
+                        "name": "Puma",
+                        "id": 6
+                    },
+                    {
+                        "name": "Nike",
+                        "id": 7
+                    },
+                    {
+                        "name": "FILA",
+                        "id": 8
+                    },
+                    {
+                        "name": "HRX",
+                        "id": 9
+                    }
+                ]
+            },
+            {
+                "name": "Category",
+                "id": 10,
+                "subCategories": [
+                    {
+                        "name": "Shoes",
+                        "id": 11,
+                        "subCategories": [
+                            {
+                                "id": 12,
+                                "name": "Running"
+                            },
+                            {
+                                "id": 13,
+                                "name": "Walking"
+                            },
+                            {
+                                "id": 14,
+                                "name": "Party"
+                            },
+                            {
+                                "id": 15,
+                                "name": "Formal"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Watches",
+                        "id": 16,
+                        "subCategories": [
+                            {
+                                "id": 17,
+                                "name": "Sports"
+                            },
+                            {
+                                "id": 18,
+                                "name": "Digital"
+                            },
+                            {
+                                "id": 19,
+                                "name": "Analog"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Women",
+        "id": 20,
+        "subCategories": [
+            {
+                "name": "Brands",
+                "id": 21,
+                "subCategories": [
+                    {
+                        "name": "Levis",
+                        "id": 22
+                    },
+                    {
+                        "name": "Prague",
+                        "id": 23
+                    },
+                    {
+                        "name": "Button",
+                        "id": 24
+                    },
+                    {
+                        "name": "XX",
+                        "id": 25
+                    },
+                    {
+                        "name": "JimmyChoo",
+                        "id": 26
+                    }
+                ]
+            },
+            {
+                "name": "Category",
+                "id": 27,
+                "subCategories": [
+                    {
+                        "name": "Bags",
+                        "id": 28,
+                        "subCategories": [
+                            {
+                                "id": 29,
+                                "name": "HandBag"
+                            },
+                            {
+                                "id": 30,
+                                "name": "Purse"
+                            },
+                            {
+                                "id": 31,
+                                "name": "Clutch"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Lipstick",
+                        "id": 32,
+                        "subCategories": [
+                            {
+                                "id": 33,
+                                "name": "Red",
+                                "subCategories": [
+                                    {
+                                        "id": 34,
+                                        "name": "Dark Red"
+                                    },
+                                    {
+                                        "id": 35,
+                                        "name": "Light Red"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": 36,
+                                "name": "Pink"
+                            },
+                            {
+                                "id": 37,
+                                "name": "Black"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
