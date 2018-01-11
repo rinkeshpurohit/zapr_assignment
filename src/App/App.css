@@ -4,8 +4,7 @@
     margin: 15px 0; }
     .products-section .product img {
       width: 100%;
-      height: auto;
-      max-width: 300px; }
+      height: auto; }
     .products-section .product p {
       margin: 0; }
   .products-section .category-meta * {

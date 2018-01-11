@@ -13,7 +13,7 @@ class ProductListingComponent extends Component {
 
     var productsHTML = products.map((product) => {
       return (
-        <div key={product.id} className="product col-md-3">
+        <div key={product.id} className="product col-md-3 col-sm-6">
           <div className="pdt-img-cnt">
             <img src={product.imgUrl} alt={products.name} />
           </div>

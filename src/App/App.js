@@ -141,13 +141,13 @@ class App extends Component {
                         }
                     </div>
                 </div>
-                <div className="col-md-offset-2 col-md-10 products-section">
+                <div className="col-sm-offset-2 col-sm-10 products-section">
                     <div className="products-header row">
-                        <div className="col-md-6 category-meta">
+                        <div className="col-sm-6 category-meta">
                             <h3 className="category-title">Category Name</h3>
                             <p className="product-count">Showing {total} products</p>
                         </div>
-                        <div className="col-md-6 sort-section">
+                        <div className="col-sm-6 sort-section">
                             <select className="pull-right" name="Sort by" 
                                 onChange={this.sortProducts}>
                             {
