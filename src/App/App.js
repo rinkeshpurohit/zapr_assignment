@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './App.css'
 
 import ProductListingComponent from '../ProductListingComponent/ProductListingComponent';
-import FiltersComponent from '../FiltersComponent/FiltersComponent';
+// import FiltersComponent from '../FiltersComponent/FiltersComponent'; 
+import TreeNode from "../FiltersComponent/TreeNode";   
 
 class App extends Component {
     constructor() {
         super();
+        this.sort = ['price', 'rating'];
+        let _this = this;
+
         this.state = {
             'products': [],
             'categories': [],
             'filters': [],
-            'displayedPdts': []
+            'displayedPdts': [],
+            'sortBy': _this.sort[0]
         };
 
         this.handleFilterSelection = this.handleFilterSelection.bind(this);
+        this.sortProducts = this.sortProducts.bind(this);
     }
 
     handleFilterSelection(categories) {
@@ -48,12 +55,14 @@ class App extends Component {
 
     componentDidMount() {
         var _this = this;
-        this.productRequest = axios.get(`/products.json`)
+        this.productRequest = axios.get('/products.json')
             .then(res => {
                 const products = res.data;
                 _this.setState({
                     'products': products,
                     'displayedPdts': products
+                },()=> {
+                    _this.sortDisplayedPdts(this.state.sortBy);
                 });
             });
 
@@ -63,27 +72,59 @@ class App extends Component {
                 _this.setState({
                     'categories': categories
                 });
-                console.log('categories', categories);
             });
 
     }
 
+    sortProducts(event) {
+        this.setState({
+            sortBy: event.target.value
+        });
+        this.sortDisplayedPdts(event.target.value);
+    }
+
+    sortDisplayedPdts(key) {
+        let products = this.state.displayedPdts.slice(0);
+        let sorted = products.sort((a,b) => {
+            return b[key] - a[key];
+        });
+
+        this.setState({
+            displayedPdts: sorted
+        })
+    }
+
     render() {
+        let tree1 = this.state.categories.map(function (child) {
+            return <TreeNode key={child.id} data={child} onFilterSelection={this.handleFilterSelection} />;
+        }.bind(this));
+
         return (
             <section className="container-fluid">
                 <div className="row">
                     <div className="filter-section">
-                        <FiltersComponent 
+                        {/* <FiltersComponent 
                             data={this.state.categories} 
                             onFilterSelection={this.handleFilterSelection}    
-                        />
+                        /> */}
+                        {tree1}
                     </div>
                 </div>
                 <div className="col-md-offset-2 col-md-10 products-section">
                     <div className="products-header row">
-                        <h3 className="col-md-6">Category Name</h3>
+                        <div className="col-md-6 category-meta">
+                            <h3 className="category-title">Category Name</h3>
+                            <p className="product-count">Showing {this.state.displayedPdts.length} products</p>
+                        </div>
                         <div className="col-md-6 sort-section">
-                            <select className="pull-right" name="Sort by" id=""></select>
+                            <select className="pull-right" name="Sort by" 
+                                onChange={this.sortProducts}>
+                            {
+                                this.sort.map((item,index)=>{
+                                        return (<option key={index} value={item}>{item}</option>)
+                                })
+                            }
+                            </select>
                         </div>
                     </div>
                     <ProductListingComponent products={this.state.displayedPdts} />

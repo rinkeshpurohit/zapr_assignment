@@ -1,0 +1,32 @@
+.products-section {
+    padding-top: 50px;
+    .product {
+        margin: 15px 0;
+        img {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+        }
+        p {
+            margin: 0;
+        }
+    }
+    .category-meta {
+        *{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .product-count {
+            font-size: 14px;
+            font-weight: light;
+            margin-left: 20px;
+        }
+    }
+
+    .sort-section {
+        select {
+            margin: 1.17em 0;
+        }
+    }
+    
+}

@@ -1,0 +1,43 @@
+.navi {
+  .naviWrapper {
+    font-size: 15px;
+    text-decoration: none;
+    color: #3e4152;
+    display: block;
+  }
+
+  .naviWrapper .naviWrapper {
+    padding-left: 20px;
+  }
+
+  .naviLevel {
+    display: block;
+    padding: 16px 24px;
+    border-bottom: 1px solid #eaeaec;
+    font-size: 13px;
+
+    &.title {
+      font-size: 10px;
+      color: #94969f;
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .icon-chevron,
+    .icon-chevron2 {
+      color: #a9abb3;
+    }
+
+    &.level-1 {
+      font-weight: 500;
+    }
+
+    &.level-2 {
+      font-weight: 400;
+    }
+
+    &.level-3 {
+      font-weight: 400;
+    }
+  }
+}

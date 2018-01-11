@@ -21,14 +21,3 @@ header {
   overflow: auto;
   background-color: #eee;
   border-right: 1px solid #dedada; }
-
-.products-section {
-  padding-top: 50px; }
-  .products-section .product {
-    margin: 15px 0; }
-    .products-section .product img {
-      width: 100%;
-      height: auto;
-      max-width: 300px; }
-    .products-section .product p {
-      margin: 0; }

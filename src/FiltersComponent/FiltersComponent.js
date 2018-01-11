@@ -31,8 +31,8 @@ class FiltersComponent extends Component {
     }
 
     toggleCategory(item) {
-        item.expanded = !item.expanded;
-        this.renderSubMenu(item.subCategories);
+        // item.expanded = !item.expanded;
+        // this.renderSubMenu(item.subCategories);
     }
 
     renderSubMenu(items) {
@@ -41,7 +41,7 @@ class FiltersComponent extends Component {
         const menuOptions = items.map(item => {
             const display = (<span onClick={(e)=> {
                 e.stopPropagation();
-                _this.toggleCategory(item);
+                // _this.toggleCategory(item);
             }}>{item.name}</span>),
                 hasChildren = (item.subCategories
                     && item.subCategories.length > 0
@@ -49,7 +49,7 @@ class FiltersComponent extends Component {
 
             let subMenu;
 
-            if (hasChildren && item.expanded) {
+            if (hasChildren) {
                 subMenu = _this.renderSubMenu(item.subCategories);
             }
             return (

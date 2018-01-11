@@ -1,0 +1,19 @@
+.products-section {
+  padding-top: 50px; }
+  .products-section .product {
+    margin: 15px 0; }
+    .products-section .product img {
+      width: 100%;
+      height: auto;
+      max-width: 300px; }
+    .products-section .product p {
+      margin: 0; }
+  .products-section .category-meta * {
+    display: inline-block;
+    vertical-align: middle; }
+  .products-section .category-meta .product-count {
+    font-size: 14px;
+    font-weight: light;
+    margin-left: 20px; }
+  .products-section .sort-section select {
+    margin: 1.17em 0; }
