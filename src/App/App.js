@@ -3,7 +3,6 @@ import axios from 'axios';
 import './App.css'
 
 import ProductListingComponent from '../ProductListingComponent/ProductListingComponent';
-// import FiltersComponent from '../FiltersComponent/FiltersComponent'; 
 import TreeNode from "../FiltersComponent/TreeNode";   
 
 class App extends Component {
@@ -94,6 +93,14 @@ class App extends Component {
         })
     }
 
+    clearAllFilters() {
+        let products = this.state.products;
+        this.setState({
+            filters: [],
+            displayedPdts: products 
+        });
+    }
+
     render() {
         let tree1 = this.state.categories.map(function (child) {
             return <TreeNode key={child.id} data={child} onFilterSelection={this.handleFilterSelection} />;
@@ -103,11 +110,12 @@ class App extends Component {
             <section className="container-fluid">
                 <div className="row">
                     <div className="filter-section">
-                        {/* <FiltersComponent 
-                            data={this.state.categories} 
-                            onFilterSelection={this.handleFilterSelection}    
-                        /> */}
                         {tree1}
+                        {
+                            (this.state.filters.length)
+                            ? <span className="clear-filters" onClick={this.clearAllFilters.bind(this)}>Clear All</span>
+                            : ''
+                        }
                     </div>
                 </div>
                 <div className="col-md-offset-2 col-md-10 products-section">
