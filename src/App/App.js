@@ -9,8 +9,41 @@ class App extends Component {
         super();
         this.state = {
             'products': [],
-            'categories': []
+            'categories': [],
+            'filters': [],
+            'displayedPdts': []
         };
+
+        this.handleFilterSelection = this.handleFilterSelection.bind(this);
+    }
+
+    handleFilterSelection(categories) {
+        let filters = this.state.filters.slice(0);
+        filters.push(categories);
+        this.setState({
+            'filters': filters
+        });
+        this.filterProducts(filters);
+    }
+
+    filterProducts(filters) {
+        let filteredProducts = [];
+        let products = this.state.products;
+
+        filters.forEach(filter => {
+            let tempPdts = products.filter((product) => {
+                if (filter.indexOf(product.categoryId) > -1) {
+                    return true;
+                }
+                return false;
+            });
+            filteredProducts = filteredProducts.concat(tempPdts);
+        })
+
+        console.log('filtered', filteredProducts.length);
+        this.setState({
+            'displayedPdts' : filteredProducts
+        });
     }
 
     componentDidMount() {
@@ -19,7 +52,8 @@ class App extends Component {
             .then(res => {
                 const products = res.data;
                 _this.setState({
-                    'products': products
+                    'products': products,
+                    'displayedPdts': products
                 });
             });
 
@@ -29,6 +63,7 @@ class App extends Component {
                 _this.setState({
                     'categories': categories
                 });
+                console.log('categories', categories);
             });
 
     }
@@ -38,7 +73,10 @@ class App extends Component {
             <section className="container-fluid">
                 <div className="row">
                     <div className="filter-section">
-                        <FiltersComponent categories={this.state.categories} />
+                        <FiltersComponent 
+                            data={this.state.categories} 
+                            onFilterSelection={this.handleFilterSelection}    
+                        />
                     </div>
                 </div>
                 <div className="col-md-offset-2 col-md-10 products-section">
@@ -48,7 +86,7 @@ class App extends Component {
                             <select className="pull-right" name="Sort by" id=""></select>
                         </div>
                     </div>
-                    <ProductListingComponent products={this.state.products} />
+                    <ProductListingComponent products={this.state.displayedPdts} />
                 </div>
             </section>
         )
