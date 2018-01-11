@@ -19,6 +19,9 @@ export default class Paginator extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        if(this.props.totalItems === nextProps.totalItems) {
+            return;
+        }
         const perPage = 10;
         let totalItems = nextProps.totalItems;
         let totalPage = Math.ceil(totalItems / perPage);
@@ -26,7 +29,8 @@ export default class Paginator extends Component {
         this.setState({
             'currPage': 1,
             'totalPage': totalPage
-        });       
+        });
+       
     }
 
 
@@ -60,7 +64,7 @@ export default class Paginator extends Component {
         let previous = <button onClick={e=> {this.handlePageChange(-1)}}>Previous</button>;
         let buttons;
 
-        if(totalPage===1) {
+        if(totalPage === 1) {
             buttons = '';
         }
         else if(currPage>=totalPage) {
