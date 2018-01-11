@@ -82,6 +82,8 @@ class FiltersComponent extends Component {
     }
 
     render() {
+        const items = this.props.data;
+
         return (
             <ul>
                 {this.renderSubMenu(items)}
