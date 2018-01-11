@@ -17,3 +17,15 @@
     margin-left: 20px; }
   .products-section .sort-section select {
     margin: 1.17em 0; }
+
+.filter-section {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 16.666667%;
+  bottom: 0;
+  overflow: auto;
+  background-color: #eee;
+  border-right: 1px solid #dedada;
+  padding-left: 10px;
+  padding-top: 10px; }

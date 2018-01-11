@@ -19,7 +19,7 @@ class ProductListingComponent extends Component {
           </div>
           <div className="pdt-info-cnt">
             <div className="row">
-              <p className="col-xs-7 pdt-name">{product.name}--{product.categoryId}</p>
+              <p className="col-xs-7 pdt-name">{product.name}</p>
               <span className="col-xs-5 text-right">{product.rating}</span>
             </div>
             <p className="pdt-price">{product.price}</p>

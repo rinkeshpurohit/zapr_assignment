@@ -68,15 +68,17 @@ export default class TreeNode extends Component {
         if (subtree) {
             return (
                 <div className="tree-node">
-                    <Arrow arrowClassName={arrowClassName} onClick={this.onClick.bind(this)} />
-                    <a data-id={this.props.data.id}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            this.getChildCategories(this.props.data);
-                        }}>
-                        {this.props.data.name} -- {this.props.data.id}
-                    </a>
+                    <div className="node-title">
+                        <Arrow arrowClassName={arrowClassName} onClick={this.onClick.bind(this)} />
+                        <a data-id={this.props.data.id}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                this.getChildCategories(this.props.data);
+                            }}>
+                            {this.props.data.name}
+                        </a>
+                    </div>
                     <div className={containerClassName}>
                         {subtree}
                     </div>
@@ -86,14 +88,16 @@ export default class TreeNode extends Component {
         else {
             return (
                 <div className="tree-node-leaf">
-                    <a data-id={this.props.data.id}
-                        onClick={(e)=> {
-                            e.stopPropagation();
-                            this.getChildCategories(this.props.data);
-                        }}
-                    >
-                        {this.props.data.name}--{this.props.data.id}
-                    </a>
+                    <div className="node-title">
+                        <a data-id={this.props.data.id}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                this.getChildCategories(this.props.data);
+                            }}
+                        >
+                            {this.props.data.name}
+                        </a>
+                    </div>
                 </div>
             );
         }

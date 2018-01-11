@@ -7,7 +7,6 @@ export default class Arrow extends Component {
             <div
                 className={this.props.arrowClassName}
                 onClick={this.props.onClick}>
-                ▾
             </div>
         );
     }

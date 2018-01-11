@@ -11,13 +11,3 @@ header {
     color: #fff;
     padding: 7px;
     margin: 0; }
-
-.filter-section {
-  position: fixed;
-  top: 50px;
-  left: 0;
-  width: 16.666667%;
-  bottom: 0;
-  overflow: auto;
-  background-color: #eee;
-  border-right: 1px solid #dedada; }
