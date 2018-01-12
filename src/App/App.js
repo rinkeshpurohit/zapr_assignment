@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css'
+import axios from "axios";
 import { requests } from "../API";
 
 import ProductListingComponent from '../ProductListingComponent/ProductListingComponent';
@@ -83,22 +84,25 @@ class App extends Component {
 
     componentDidMount() {
         var _this = this;
-        requests.getProducts().then(res => {
-            const products = res.data;
-            _this.setState({
-                'products': products,
-                'displayedPdts': products
-            },()=> {
-                _this.sortDisplayedPdts(this.state.sortBy);
-            });
-        });
 
-        requests.getCategories().then(res => {
-            const categories = res.data;
-            _this.setState({
-                'categories': categories
-            });
-        });
+        function getProducts() {
+            return requests.getProducts();
+        }
+
+        function getCategories() {
+            return requests.getCategories();
+        }
+
+        axios.all([getProducts(),getCategories()])
+            .then(axios.spread((function(products, categories){
+                _this.setState({
+                    'products': products.data,
+                    'displayedPdts': products.data,
+                    'categories': categories.data
+                }, () => {
+                    _this.sortDisplayedPdts(_this.state.sortBy);
+                });
+            })));
 
     }
 
