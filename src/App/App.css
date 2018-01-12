@@ -28,3 +28,16 @@
   border-right: 1px solid #dedada;
   padding-left: 10px;
   padding-top: 10px; }
+
+.range-section {
+  margin-top: 10px; }
+  .range-section .rc-slider {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 10px; }
+  .range-section .rc-slider-rail {
+    background-color: #ddd; }
+  .range-section .rc-slider-track {
+    background-color: #9e9e9e; }
+  .range-section .rc-slider-handle {
+    border-color: #9e9e9e; }

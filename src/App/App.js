@@ -132,7 +132,7 @@ class App extends Component {
         this.applyRanges(this.state.range,()=>{
             this.setState({
                 filters: [],
-                displayedPdts: _this.state.displayedPdts
+                displayedPdts: _this.state.displayedPdts    
             }, () => {
                 _this.sortDisplayedPdts(this.state.sortBy);
             });
@@ -174,18 +174,25 @@ class App extends Component {
         }.bind(this));
 
         let total = this.state.displayedPdts.length;
+        let range = this.state.range;
 
         return (
             <section className="container-fluid">
                 <div className="row">
                     <div className="filter-section">
                         {tree1}
-                        <Range onChange={this.setRange} step={500} min={0} max={10000}/>
                         {
                             (this.state.filters.length)
                             ? <span className="clear-filters" onClick={this.clearAllFilters.bind(this)}>Clear All</span>
                             : ''
                         }
+                        <div className="range-section">
+                            <div className="clearfix">
+                                <span className="pull-left">Rs. {range[0]}</span>
+                                <span className="pull-right">Rs. {range[1]}</span>
+                            </div>
+                            <Range onChange={this.setRange} step={500} min={0} max={10000} />
+                        </div>
                     </div>
                 </div>
                 <div className="col-sm-offset-2 col-sm-10 products-section">
