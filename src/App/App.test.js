@@ -7,8 +7,13 @@ import sinon from 'sinon';
 import axios from 'axios';
 import App from "./App";
 
+import jsdom from 'jsdom'
+const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
+global.document = doc
+global.window = doc.defaultView
+
 it('calls componentDidMount', () => {
-    // const component = mount(
-    //     <App />
-    // );
+    const component = mount(
+        <App />
+    );
 });

@@ -6,6 +6,11 @@ import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 import ProductListingComponent from './ProductListingComponent';
 
+import jsdom from 'jsdom'
+const doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
+global.document = doc
+global.window = doc.defaultView
+
 it('renders all the provided elements', () => {
   const products = [
     {

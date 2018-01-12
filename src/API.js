@@ -1,8 +1,19 @@
 import axios from "axios";
 
+// added to supprt testing
+const env = process.env.NODE_ENV;
+let prefix;
+
+if(env === 'test') { 
+    prefix = 'http://localhost:3000';
+}
+else {
+    prefix = '';
+}
+
 const URL = {
-    'products': '/products.json',
-    'categories': '/categories.json'
+    'products': prefix+'/products.json',
+    'categories': prefix+'/categories.json'
 }
 
 const requests = {
