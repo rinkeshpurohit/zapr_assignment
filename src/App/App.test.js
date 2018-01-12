@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { expect } from 'chai';
+import { spy } from 'sinon';
 import axios from 'axios';
-import { shallow } from 'enzyme';
+import { shallow, mount, render } from 'enzyme';
+import sinon from 'sinon';
 import App from "./App";
 
-describe('Component', () => {
-    it('should attach the components', () => {
-        // const wrapper = shallow(<App />);
-        // const div = document.createElement('div');
-        // expect(wrapper.text()).to.contain(0);
-        // wrapper.find('button').simulate('click');
-        // expect(wrapper.text()).to.contain(1);
-        // ReactDOM.render(<App />, div);
-    });
+it('calls componentDidMount', () => {
+    // const component = mount(
+    //     <App />
+    // );
 });

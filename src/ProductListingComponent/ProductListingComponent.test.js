@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
-import { expect } from 'chai'; 
-import { mount } from 'enzyme';
+import { expect } from 'chai';
 import { spy } from 'sinon';
+import { shallow, mount, render } from 'enzyme';
+import sinon from 'sinon';
 import ProductListingComponent from './ProductListingComponent';
 
 it('renders all the provided elements', () => {
@@ -109,6 +109,9 @@ it('renders all the provided elements', () => {
       "categoryId": 5
     }
   ];
-  const wrapper = shallow(<ProductListingComponent products={products}/>);
-  expect(wrapper.find('.product')).to.have.length(10);
+  const listing = mount(
+    <ProductListingComponent products={products}/>
+  );
+  const product = listing.find('.product')
+  expect(product).to.have.length(products.length);
 });
