@@ -35,7 +35,7 @@ class App extends Component {
         let filters = this.state.filters.slice(0);
         filters.push(categories);
         this.setState({
-            'filters': filters
+            'filters': categories
         },()=>{
             _this.filterProducts();
         });
@@ -52,15 +52,13 @@ class App extends Component {
             let products = _this.state.displayedPdts;
             console.log(filters)
             if(filters.length>0) {
-                filters.forEach(filter => {
-                    let tempPdts = products.filter((product) => {
-                        if (filter.indexOf(product.categoryId) > -1) {
-                            return true;
-                        }
-                        return false;
-                    });
-                    filteredProducts = filteredProducts.concat(tempPdts);
+                let tempPdts = products.filter((product) => {
+                    if (filters.indexOf(product.categoryId) > -1) {
+                        return true;
+                    }
+                    return false;
                 });
+                filteredProducts = filteredProducts.concat(tempPdts);
             }
             else {
                 filteredProducts = products.slice(0);
