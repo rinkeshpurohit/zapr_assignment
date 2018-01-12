@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css'
+import { requests } from "../API";
 
 import ProductListingComponent from '../ProductListingComponent/ProductListingComponent';
 import TreeNode from "../FiltersComponent/TreeNode";
@@ -83,24 +83,22 @@ class App extends Component {
 
     componentDidMount() {
         var _this = this;
-        this.productRequest = axios.get('/products.json')
-            .then(res => {
-                const products = res.data;
-                _this.setState({
-                    'products': products,
-                    'displayedPdts': products
-                },()=> {
-                    _this.sortDisplayedPdts(this.state.sortBy);
-                });
+        requests.getProducts().then(res => {
+            const products = res.data;
+            _this.setState({
+                'products': products,
+                'displayedPdts': products
+            },()=> {
+                _this.sortDisplayedPdts(this.state.sortBy);
             });
+        });
 
-        this.filterRequest = axios.get('/categories.json')
-            .then(res => {
-                const categories = res.data;
-                _this.setState({
-                    'categories': categories
-                });
+        requests.getCategories().then(res => {
+            const categories = res.data;
+            _this.setState({
+                'categories': categories
             });
+        });
 
     }
 
@@ -148,7 +146,6 @@ class App extends Component {
     }
 
     applyRanges(range,cb) {
-        let _this = this;
         let products = this.state.products;
         let inRange = products.filter((product)=>{
             if(product.price<=range[1] && product.price>=range[0]) {
