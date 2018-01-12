@@ -5,6 +5,8 @@ import './App.css'
 import ProductListingComponent from '../ProductListingComponent/ProductListingComponent';
 import TreeNode from "../FiltersComponent/TreeNode";
 import Paginator from "../Paginator/Paginator";
+import { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class App extends Component {
     constructor() {
@@ -18,44 +20,67 @@ class App extends Component {
             'filters': [],
             'displayedPdts': [],
             'slicedPdts': [],
-            'sortBy': _this.sort[0]
+            'sortBy': _this.sort[0],
+            'range': [0,10000]
         };
 
         this.handleFilterSelection = this.handleFilterSelection.bind(this);
         this.handleSlicedArray = this.handleSlicedArray.bind(this);
         this.sortProducts = this.sortProducts.bind(this);
+        this.setRange = this.setRange.bind(this);
     }
 
     handleFilterSelection(categories) {
+        let _this = this;
         let filters = this.state.filters.slice(0);
         filters.push(categories);
         this.setState({
             'filters': filters
+        },()=>{
+            _this.filterProducts();
         });
-        this.filterProducts(filters);
     }
 
-    filterProducts(filters) {
+    filterProducts() {
         let _this = this;
+        let filters = this.state.filters;
         let filteredProducts = [];
-        let products = this.state.products;
 
-        filters.forEach(filter => {
-            let tempPdts = products.filter((product) => {
-                if (filter.indexOf(product.categoryId) > -1) {
-                    return true;
-                }
-                return false;
+        this.applyRanges(this.state.range, goForward);
+
+        function goForward() {
+            let products = _this.state.displayedPdts;
+            console.log(filters)
+            if(filters.length>0) {
+                filters.forEach(filter => {
+                    let tempPdts = products.filter((product) => {
+                        if (filter.indexOf(product.categoryId) > -1) {
+                            return true;
+                        }
+                        return false;
+                    });
+                    filteredProducts = filteredProducts.concat(tempPdts);
+                });
+            }
+            else {
+                filteredProducts = products.slice(0);
+            }
+            console.log('filtered', filteredProducts.length);
+            _this.setState({
+                'displayedPdts': filteredProducts
+            }, () => {
+                _this.sortDisplayedPdts(_this.state.sortBy);
             });
-            filteredProducts = filteredProducts.concat(tempPdts);
-        })
+        }
+    }
 
-        console.log('filtered', filteredProducts.length);
+    setRange(range) {
+        let _this = this;
         this.setState({
-            'displayedPdts' : filteredProducts
+            'range': range
         },()=> {
-            _this.sortDisplayedPdts(this.state.sortBy);
-        });
+            _this.filterProducts();
+        })
     }
 
     componentDidMount() {
@@ -104,13 +129,15 @@ class App extends Component {
 
     clearAllFilters() {
         let _this = this;
-        let products = this.state.products;
-        this.setState({
-            filters: [],
-            displayedPdts: products 
-        },()=>{
-            _this.sortDisplayedPdts(this.state.sortBy);
+        this.applyRanges(this.state.range,()=>{
+            this.setState({
+                filters: [],
+                displayedPdts: _this.state.displayedPdts
+            }, () => {
+                _this.sortDisplayedPdts(this.state.sortBy);
+            });
         });
+        
     }
 
     handleSlicedArray(sliceIndesxes) {
@@ -119,6 +146,25 @@ class App extends Component {
 
         this.setState({
             'slicedPdts': sliced
+        });
+    }
+
+    applyRanges(range,cb) {
+        let _this = this;
+        let products = this.state.products;
+        let inRange = products.filter((product)=>{
+            if(product.price<=range[1] && product.price>=range[0]) {
+                return true;
+            }
+            return false;
+        });
+        console.log('range', range);
+        console.log('in range',inRange.length);
+
+        this.setState({
+            'displayedPdts': inRange
+        }, () => {
+            if(cb || typeof cb === 'function') cb();
         });
     }
 
@@ -134,6 +180,7 @@ class App extends Component {
                 <div className="row">
                     <div className="filter-section">
                         {tree1}
+                        <Range onChange={this.setRange} step={500} min={0} max={10000}/>
                         {
                             (this.state.filters.length)
                             ? <span className="clear-filters" onClick={this.clearAllFilters.bind(this)}>Clear All</span>
@@ -160,7 +207,7 @@ class App extends Component {
                     </div>
                     {
                         (total===0)
-                        ? <p> Loading......</p>
+                        ? <p> No Products..</p>
                         : (
                             <div>
                                 <ProductListingComponent products={this.state.slicedPdts} />

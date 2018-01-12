@@ -1,0 +1,14 @@
+.range-slider {
+  position: relative; }
+  .range-slider input[type=range] {
+    pointer-events: none;
+    position: absolute;
+    border: none;
+    overflow: hidden;
+    left: 0;
+    top: 20px;
+    width: 80%;
+    outline: none;
+    height: 20px;
+    margin: 0;
+    padding: 0; }
