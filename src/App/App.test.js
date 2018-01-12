@@ -13,7 +13,9 @@ global.document = doc
 global.window = doc.defaultView
 
 it('calls componentDidMount', () => {
+    sinon.spy(App.prototype, 'componentDidMount');
     const component = mount(
         <App />
     );
+    expect(App.prototype.componentDidMount.calledOnce).to.equal(true);
 });
