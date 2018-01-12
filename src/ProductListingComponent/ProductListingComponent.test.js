@@ -114,4 +114,5 @@ it('renders all the provided elements', () => {
   );
   const product = listing.find('.product')
   expect(product).to.have.length(products.length);
+  expect(listing.props().products.length).to.equal(products.length);
 });
